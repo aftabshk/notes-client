@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { NotesService } from "./app.service";
+import { NotesService } from "./services/NotesService";
 
 @Component({
   selector: "app-root",
@@ -13,18 +13,5 @@ export class AppComponent {
 
   addNoteClicked() {
     this.addingNote = true;
-    this.getAllNotes();
-  }
-
-  saveNote(title, description) {
-    const note = { title, description };
-    this.notesService.saveNote(note).subscribe();
-    this.addingNote = false;
-  }
-
-  getAllNotes() {
-    this.notesService.getAllNotes().subscribe(data => {
-      console.log(data);
-    });
   }
 }

@@ -1,14 +1,13 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
-import { Note } from './Note';
+import { Note } from "../models/Note";
 
-@Injectable({
-  providedIn: "root"
-})
+@Injectable({ providedIn: "root" })
 export class NotesService {
   constructor(private http: HttpClient) {}
 
-  saveNote(note) {
+  saveNote(note: Note) {
+    console.log(note);
     return this.http.post("/notes", note);
   }
 

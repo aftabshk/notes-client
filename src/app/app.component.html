@@ -1,18 +1,2 @@
 <button (click)="addNoteClicked()">Add note</button>
-<textarea
-  *ngIf="addingNote"
-  [(ngModel)]="title"
-  placeholder="Title"
-  rows="2"
-  cols="100"
-></textarea>
-<textarea
-  *ngIf="addingNote"
-  [(ngModel)]="description"
-  placeholder="Description"
-  rows="20"
-  cols="100"
-></textarea>
-<button *ngIf="addingNote" (click)="saveNote(title, description)">
-  Save
-</button>
+<add-note *ngIf="addingNote"></add-note>

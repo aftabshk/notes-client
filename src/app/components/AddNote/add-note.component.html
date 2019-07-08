@@ -1,0 +1,15 @@
+<textarea
+  [(ngModel)]="title"
+  placeholder="Title"
+  rows="2"
+  cols="100"
+></textarea>
+<textarea
+  [(ngModel)]="description"
+  placeholder="Description"
+  rows="20"
+  cols="100"
+></textarea>
+<button (click)="saveNote({ title: title, description: description })">
+  Save
+</button>
