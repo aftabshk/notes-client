@@ -6,9 +6,10 @@ import { FormsModule } from "@angular/forms";
 import { AppComponent } from "./app.component";
 import { AddNote } from "./components/AddNote/add-note.component";
 import { NotesService } from "./services/NotesService";
+import { NoteComponent } from "./components/note/note.component";
 
 @NgModule({
-  declarations: [AppComponent, AddNote],
+  declarations: [AppComponent, AddNote, NoteComponent],
   imports: [BrowserModule, HttpClientModule, FormsModule],
   providers: [NotesService],
   bootstrap: [AppComponent]
