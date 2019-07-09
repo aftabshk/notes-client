@@ -9,7 +9,7 @@ import { Note } from "./models/Note";
 })
 export class AppComponent implements OnInit {
   addingNote: boolean;
-  notes: Note[];
+  notes: Note[] | [];
 
   constructor(private notesService: NotesService) {}
 
