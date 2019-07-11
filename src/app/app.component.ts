@@ -17,13 +17,6 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {}
 
-  getNotes() {
-    this.notesService.getAllNotes(this.userToken).subscribe(notes => {
-      this.notes = notes;
-      console.log(notes);
-    });
-  }
-
   addNoteClicked() {
     this.addingNote = true;
   }
@@ -31,5 +24,8 @@ export class AppComponent implements OnInit {
   getUserLoginStatus(event) {
     this.isLoggedIn = event.isLoggedIn;
     this.userToken = event.token;
+    this.notesService.getAllNotes(this.userToken).subscribe(notes => {
+      this.notes = notes;
+    });
   }
 }

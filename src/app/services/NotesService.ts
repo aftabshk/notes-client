@@ -1,19 +1,15 @@
+import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import {
-  HttpClient,
-  HttpErrorResponse,
-  HttpResponse
-} from "@angular/common/http";
-import { Note } from "../models/Note";
+import { Observable, throwError } from "rxjs/index";
 import { catchError } from "rxjs/operators";
-import { throwError, Observable } from "rxjs/index";
+import { Note } from "../models/Note";
 
 @Injectable({ providedIn: "root" })
 export class NotesService {
   constructor(private http: HttpClient) {}
 
-  saveNote(note: Note) {
-    return this.http.post("/notes", note);
+  saveNote(note: Note, token: string) {
+    return this.http.post("/notes", { note, token });
   }
 
   getAllNotes(userToken: string): Observable<Note[] | []> {

@@ -1,3 +1,10 @@
+<login-component
+  *ngIf="!isLoggedIn"
+  (whenLoggedIn)="getUserLoginStatus($event)"
+></login-component>
+
+<signup-component *ngIf="!isLoggedIn"></signup-component>
+
 <div *ngIf="isLoggedIn">
   <note-component
     *ngFor="let note of notes"
@@ -5,9 +12,5 @@
     [description]="note.description"
   ></note-component>
   <button (click)="addNoteClicked()">Add note</button>
-  <add-note *ngIf="addingNote"></add-note>
+  <add-note *ngIf="addingNote" [userToken]="userToken"></add-note>
 </div>
-<login-component
-  *ngIf="!isLoggedIn"
-  (whenLoggedIn)="getUserLoginStatus($event)"
-></login-component>
