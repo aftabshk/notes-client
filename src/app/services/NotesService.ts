@@ -13,12 +13,13 @@ export class NotesService {
   constructor(private http: HttpClient) {}
 
   saveNote(note: Note) {
-    console.log(note);
     return this.http.post("/notes", note);
   }
 
-  getAllNotes(): Observable<Note[] | []> {
-    return this.http.get<Note[]>("/notes").pipe(catchError(this.handleError));
+  getAllNotes(userToken: string): Observable<Note[] | []> {
+    return this.http
+      .get<Note[]>("/notes", { params: { token: userToken } })
+      .pipe(catchError(this.handleError));
   }
 
   handleError(error: HttpErrorResponse) {

@@ -10,16 +10,26 @@ import { Note } from "./models/Note";
 export class AppComponent implements OnInit {
   addingNote: boolean;
   notes: Note[] | [];
+  isLoggedIn: boolean;
+  userToken: string;
 
   constructor(private notesService: NotesService) {}
 
-  ngOnInit() {
-    this.notesService.getAllNotes().subscribe(notes => {
+  ngOnInit() {}
+
+  getNotes() {
+    this.notesService.getAllNotes(this.userToken).subscribe(notes => {
       this.notes = notes;
+      console.log(notes);
     });
   }
 
   addNoteClicked() {
     this.addingNote = true;
+  }
+
+  getUserLoginStatus(event) {
+    this.isLoggedIn = event.isLoggedIn;
+    this.userToken = event.token;
   }
 }
