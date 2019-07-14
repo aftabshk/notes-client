@@ -10,6 +10,8 @@
     *ngFor="let note of notes"
     [title]="note.title"
     [description]="note.description"
+    [id]="note.id"
+    [token]="userToken"
   ></note-component>
   <button (click)="addNoteClicked()">Add note</button>
   <add-note *ngIf="addingNote" [userToken]="userToken"></add-note>

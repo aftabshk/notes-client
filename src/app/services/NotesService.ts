@@ -1,4 +1,8 @@
-import { HttpClient, HttpErrorResponse } from "@angular/common/http";
+import {
+  HttpClient,
+  HttpErrorResponse,
+  HttpHeaders
+} from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable, throwError } from "rxjs/index";
 import { catchError } from "rxjs/operators";
@@ -9,13 +13,36 @@ export class NotesService {
   constructor(private http: HttpClient) {}
 
   saveNote(note: Note, token: string) {
-    return this.http.post("/notes", { note, token });
+    const httpOptions = {
+      headers: new HttpHeaders({
+        "Content-Type": "application/json",
+        Authorization: token
+      })
+    };
+    return this.http.post("/notes", { note }, httpOptions);
   }
 
-  getAllNotes(userToken: string): Observable<Note[] | []> {
+  getAllNotes(token: string): Observable<Note[] | []> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        "Content-Type": "application/json",
+        Authorization: token
+      })
+    };
     return this.http
-      .get<Note[]>("/notes", { params: { token: userToken } })
+      .get<Note[]>("/notes", httpOptions)
       .pipe(catchError(this.handleError));
+  }
+
+  deleteNote(id: string, token: string) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        "Content-Type": "application/json",
+        Authorization: token
+      }),
+      params: { id }
+    };
+    return this.http.delete(`/notes`, httpOptions);
   }
 
   handleError(error: HttpErrorResponse) {
