@@ -9,6 +9,8 @@ import { NotesService } from "./services/NotesService";
 import { NoteComponent } from "./components/note/note.component";
 import { LoginComponent } from "./components/login/login.component";
 import { SignupComponent } from "./components/signup/signup.component";
+import { StoreModule } from "@ngrx/store";
+import { notesReducer } from "./store/Notes/notes.reducer";
 
 @NgModule({
   declarations: [
@@ -18,7 +20,12 @@ import { SignupComponent } from "./components/signup/signup.component";
     LoginComponent,
     SignupComponent
   ],
-  imports: [BrowserModule, HttpClientModule, FormsModule],
+  imports: [
+    BrowserModule,
+    HttpClientModule,
+    FormsModule,
+    StoreModule.forRoot({ appState: notesReducer })
+  ],
   providers: [NotesService],
   bootstrap: [AppComponent]
 })
