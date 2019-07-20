@@ -1,16 +1,17 @@
-import { BrowserModule } from "@angular/platform-browser";
 import { HttpClientModule } from "@angular/common/http";
 import { NgModule } from "@angular/core";
 import { FormsModule } from "@angular/forms";
-
+import { BrowserModule } from "@angular/platform-browser";
+import { StoreModule } from "@ngrx/store";
+import { StoreDevtoolsModule } from "@ngrx/store-devtools";
 import { AppComponent } from "./app.component";
 import { AddNote } from "./components/AddNote/add-note.component";
-import { NotesService } from "./services/NotesService";
-import { NoteComponent } from "./components/note/note.component";
 import { LoginComponent } from "./components/login/login.component";
+import { NoteComponent } from "./components/note/note.component";
 import { SignupComponent } from "./components/signup/signup.component";
-import { StoreModule } from "@ngrx/store";
-import { notesReducer } from "./store/Notes/notes.reducer";
+import { NotesService } from "./services/NotesService";
+import { reducers } from './store/reducers';
+
 
 @NgModule({
   declarations: [
@@ -24,7 +25,9 @@ import { notesReducer } from "./store/Notes/notes.reducer";
     BrowserModule,
     HttpClientModule,
     FormsModule,
-    StoreModule.forRoot({ appState: notesReducer })
+    StoreModule.forRoot(reducers),
+    StoreDevtoolsModule.instrument()
+    // StoreModule.forRoot({ appState1: loginReducer })
   ],
   providers: [NotesService],
   bootstrap: [AppComponent]

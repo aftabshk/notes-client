@@ -1,5 +1,7 @@
 import { Component, Output, EventEmitter, OnInit } from "@angular/core";
 import { AuthenticateService } from "src/app/services/AuthenticateService";
+import { Store } from "@ngrx/store";
+import { LoginSuccess } from "src/app/store/login/login.actions";
 
 @Component({
   selector: "login-component",
@@ -11,23 +13,27 @@ export class LoginComponent implements OnInit {
   @Output()
   whenLoggedIn: EventEmitter<Object> = new EventEmitter();
 
-  constructor(private authService: AuthenticateService) {}
+  constructor(
+    private authService: AuthenticateService,
+    private store: Store<any>
+  ) {}
 
   ngOnInit() {
-    this.authService.login("affi", "affi").subscribe(response => {
-      this.whenLoggedIn.emit({
-        isLoggedIn: response.status === 200,
-        token: response.body
-      });
-    });
+    // this.authService.login("affi", "affi").subscribe(response => {
+    //   this.whenLoggedIn.emit({
+    //     isLoggedIn: response.status === 200,
+    //     token: response.body
+    //   });
+    // });
   }
 
   login() {
     this.authService.login(this.userName, this.password).subscribe(response => {
-      this.whenLoggedIn.emit({
-        isLoggedIn: response.status === 200,
-        token: response.body
-      });
+      if (response.status === 200) {
+        this.store.dispatch(
+          new LoginSuccess({ name: this.userName, token: response.body })
+        );
+      }
     });
   }
 }
