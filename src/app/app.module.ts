@@ -10,8 +10,9 @@ import { LoginComponent } from "./components/login/login.component";
 import { NoteComponent } from "./components/note/note.component";
 import { SignupComponent } from "./components/signup/signup.component";
 import { NotesService } from "./services/NotesService";
-import { reducers } from './store/reducers';
-
+import { reducers } from "./store/reducers";
+import { loginReducer } from "./store/login/login.reducer";
+import { Notes } from "./components/notes/notes.component";
 
 @NgModule({
   declarations: [
@@ -19,15 +20,15 @@ import { reducers } from './store/reducers';
     AddNote,
     NoteComponent,
     LoginComponent,
-    SignupComponent
+    SignupComponent,
+    Notes
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     FormsModule,
-    StoreModule.forRoot(reducers),
+    StoreModule.forRoot({ appData: loginReducer }),
     StoreDevtoolsModule.instrument()
-    // StoreModule.forRoot({ appState1: loginReducer })
   ],
   providers: [NotesService],
   bootstrap: [AppComponent]

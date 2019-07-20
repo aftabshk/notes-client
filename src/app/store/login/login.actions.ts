@@ -7,5 +7,5 @@ export enum LoginActions {
 export class LoginSuccess implements Action {
   public readonly type = LoginActions.LOGIN_SUCCESS;
 
-  constructor(public payload: any) {}
+  constructor(public user: any) {}
 }

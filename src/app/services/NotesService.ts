@@ -1,7 +1,8 @@
 import {
   HttpClient,
   HttpErrorResponse,
-  HttpHeaders
+  HttpHeaders,
+  HttpResponse
 } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable, throwError } from "rxjs/index";

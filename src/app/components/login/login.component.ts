@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit {
     this.authService.login(this.userName, this.password).subscribe(response => {
       if (response.status === 200) {
         this.store.dispatch(
-          new LoginSuccess({ name: this.userName, token: response.body })
+          new LoginSuccess({ name: this.userName, token: response.body, isUserLoggedIn: true })
         );
       }
     });

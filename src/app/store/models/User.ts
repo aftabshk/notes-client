@@ -4,4 +4,5 @@ export interface User {
   notes: Note[];
   name: string;
   token: string;
+  isUserLoggedIn: boolean;
 }
