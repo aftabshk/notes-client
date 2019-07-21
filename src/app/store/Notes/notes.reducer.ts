@@ -1,6 +1,8 @@
 import { NotesActions } from "./notes.actions";
 
-export const notesReducer = function(notes, action) {
+const initialState = [];
+
+export const notesReducer = function(notes = initialState, action) {
   switch (action.type) {
     case NotesActions.GET_NOTES_SUCCESS: {
       return [...notes, ...action.notes];
