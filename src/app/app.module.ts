@@ -27,7 +27,7 @@ import { Notes } from "./components/notes/notes.component";
     BrowserModule,
     HttpClientModule,
     FormsModule,
-    StoreModule.forRoot({ appData: loginReducer }),
+    StoreModule.forRoot({ appData: reducers }),
     StoreDevtoolsModule.instrument()
   ],
   providers: [NotesService],

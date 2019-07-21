@@ -1,17 +1,25 @@
 import { NotesActions } from "./notes.actions";
-import { Note } from "src/app/models/Note";
 
-const initialState: Note[] = [];
-
-export const notesReducer = function(state = initialState, action) {
+export const notesReducer = function(notes, action) {
   switch (action.type) {
     case NotesActions.GET_NOTES_SUCCESS: {
-      return { ...state, notes: action.payload };
+      return [...notes, ...action.notes];
+    }
+
+    case NotesActions.ADD_NOTE_SUCCESS: {
+      return [...notes, action.note];
+    }
+
+    case NotesActions.DELETE_NOTE_SUCCESS: {
+      const index = notes.findIndex(note => {
+        return note["id"] === action.id;
+      });
+      const newNotes = notes.slice(0, index).concat(notes.slice(index + 1));
+      return [...newNotes];
     }
 
     default: {
-      console.log("In notes reducer");
-      return state;
+      return notes;
     }
   }
 };

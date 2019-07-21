@@ -18,9 +18,9 @@ export class Notes implements OnInit {
   ngOnInit() {
     this.notesService.getAllNotes(this.token).subscribe(notes => {
       this.store.dispatch(new GetNotesSuccess(notes));
-      this.store
-        .pipe(select("appData"))
-        .subscribe(appData => (this.notes = appData.notes));
+      this.store.pipe(select("appData")).subscribe(appData => {
+        this.notes = appData.notes;
+      });
     });
   }
 

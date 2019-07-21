@@ -17,7 +17,7 @@ export class AddNote implements OnInit {
 
   ngOnInit() {
     this.store.pipe(select("appData")).subscribe(appData => {
-      this.userToken = appData.token;
+      this.userToken = appData.user.token;
     });
   }
 
