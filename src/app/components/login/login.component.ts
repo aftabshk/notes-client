@@ -19,12 +19,13 @@ export class LoginComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    // this.authService.login("affi", "affi").subscribe(response => {
-    //   this.whenLoggedIn.emit({
-    //     isLoggedIn: response.status === 200,
-    //     token: response.body
-    //   });
-    // });
+    this.authService.login("affi", "affi").subscribe(response => {
+      if (response.status === 200) {
+        this.store.dispatch(
+          new LoginSuccess({ name: this.userName, token: response.body, isUserLoggedIn: true })
+        );
+      }
+    });
   }
 
   login() {

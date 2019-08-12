@@ -1,25 +1,33 @@
 import { Action } from "@ngrx/store";
+import { Note } from "src/app/models/Note";
 
 export enum NotesActions {
   GET_NOTES_SUCCESS = "[Notes Api] Get Notes Success",
   ADD_NOTE_SUCCESS = "[Notes Api] Add Note Success",
-  DELETE_NOTE_SUCCESS = "[Notes Api] Delete Note Success"
+  DELETE_NOTE_SUCCESS = "[Notes Api] Delete Note Success",
+  EDIT_NOTE_SUCCESS = "[Notes Api] Edit Note Success"
 }
 
 export class GetNotesSuccess implements Action {
   public readonly type = NotesActions.GET_NOTES_SUCCESS;
 
-  constructor(public notes: any) {}
+  constructor(public readonly notes: any) {}
 }
 
 export class AddNoteSuccess implements Action {
   public readonly type = NotesActions.ADD_NOTE_SUCCESS;
 
-  constructor(public note: any) {}
+  constructor(public readonly note: any) {}
 }
 
 export class DeleteNoteSuccess implements Action {
   public readonly type = NotesActions.DELETE_NOTE_SUCCESS;
 
-  constructor(public id: any) {}
+  constructor(public readonly id: any) {}
+}
+
+export class EditNoteSuccess implements Action {
+  public readonly type = NotesActions.EDIT_NOTE_SUCCESS;
+
+  constructor(public readonly id: any, public readonly note: Note) {}
 }

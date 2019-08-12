@@ -20,6 +20,17 @@ export const notesReducer = function(notes = initialState, action) {
       return [...newNotes];
     }
 
+    case NotesActions.EDIT_NOTE_SUCCESS: {
+      const newNotes = [...notes];
+      newNotes.forEach(note => {
+        if (note.id === action.id) {
+          note.title = action.note.title;
+          note.description = action.note.description;
+        }
+      });
+      return [...newNotes];
+    }
+
     default: {
       return notes;
     }

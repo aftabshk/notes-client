@@ -35,15 +35,24 @@ export class NotesService {
       .pipe(catchError(this.handleError));
   }
 
+  editNote(id: string, note: Note, token: string) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        "Content-Type": "application/json",
+        Authorization: token
+      })
+    };
+    return this.http.put(`/note/${id}`, { note }, httpOptions);
+  }
+
   deleteNote(id: string, token: string) {
     const httpOptions = {
       headers: new HttpHeaders({
         "Content-Type": "application/json",
         Authorization: token
-      }),
-      params: { id }
+      })
     };
-    return this.http.delete(`/notes`, httpOptions);
+    return this.http.delete(`/note/${id}`, httpOptions);
   }
 
   handleError(error: HttpErrorResponse) {
