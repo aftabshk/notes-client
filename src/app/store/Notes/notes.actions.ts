@@ -3,6 +3,7 @@ import { Note } from "src/app/models/Note";
 
 export enum NotesActions {
   GET_NOTES_SUCCESS = "[Notes Api] Get Notes Success",
+  GET_NOTES = "[Notes Api] Get Notes",
   ADD_NOTE_SUCCESS = "[Notes Api] Add Note Success",
   DELETE_NOTE_SUCCESS = "[Notes Api] Delete Note Success",
   EDIT_NOTE_SUCCESS = "[Notes Api] Edit Note Success"
@@ -30,4 +31,10 @@ export class EditNoteSuccess implements Action {
   public readonly type = NotesActions.EDIT_NOTE_SUCCESS;
 
   constructor(public readonly id: any, public readonly note: Note) {}
+}
+
+export class GetNotes implements Action {
+  public readonly type = NotesActions.GET_NOTES;
+
+  constructor(public readonly token:string) {}
 }

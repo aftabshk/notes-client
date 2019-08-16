@@ -8,11 +8,13 @@ import { AppComponent } from "./app.component";
 import { AddNote } from "./components/AddNote/add-note.component";
 import { LoginComponent } from "./components/login/login.component";
 import { NoteComponent } from "./components/note/note.component";
+import { Notes } from "./components/notes/notes.component";
 import { SignupComponent } from "./components/signup/signup.component";
 import { NotesService } from "./services/NotesService";
 import { reducers } from "./store/reducers";
-import { loginReducer } from "./store/login/login.reducer";
-import { Notes } from "./components/notes/notes.component";
+import { EffectsModule } from "@ngrx/effects";
+import { NotesEffects } from "./store/notes/notes.effects";
+import { LoginEffect } from "./store/login/login.effects";
 
 @NgModule({
   declarations: [
@@ -28,7 +30,8 @@ import { Notes } from "./components/notes/notes.component";
     HttpClientModule,
     FormsModule,
     StoreModule.forRoot({ appData: reducers }),
-    StoreDevtoolsModule.instrument()
+    StoreDevtoolsModule.instrument(),
+    EffectsModule.forRoot([NotesEffects, LoginEffect])
   ],
   providers: [NotesService],
   bootstrap: [AppComponent]

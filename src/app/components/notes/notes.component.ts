@@ -1,8 +1,9 @@
 import { Component, Input, OnInit } from "@angular/core";
 import { Store, select } from "@ngrx/store";
+import { Observable } from 'rxjs';
 import { Note } from "src/app/models/Note";
 import { NotesService } from "src/app/services/NotesService";
-import { GetNotesSuccess } from "src/app/store/notes/notes.actions";
+import { GetNotes } from 'src/app/store/notes/notes.actions';
 
 @Component({
   selector: "notes",
@@ -16,11 +17,9 @@ export class Notes implements OnInit {
   constructor(private notesService: NotesService, private store: Store<any>) {}
 
   ngOnInit() {
-    this.notesService.getAllNotes(this.token).subscribe(notes => {
-      this.store.dispatch(new GetNotesSuccess(notes));
-      this.store.pipe(select("appData")).subscribe(appData => {
-        this.notes = appData.notes;
-      });
+    this.store.dispatch(new GetNotes(this.token));
+    this.store.pipe(select("appData")).subscribe(appData => {
+      this.notes = appData.notes;
     });
   }
 

@@ -1,40 +1,22 @@
-import { Component, Output, EventEmitter, OnInit } from "@angular/core";
-import { AuthenticateService } from "src/app/services/AuthenticateService";
+import { Component, EventEmitter, Output } from "@angular/core";
 import { Store } from "@ngrx/store";
-import { LoginSuccess } from "src/app/store/login/login.actions";
+import { Login } from "src/app/store/login/login.actions";
 
 @Component({
   selector: "login-component",
   templateUrl: "./login.component.html"
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
   userName: string;
   password: string;
   @Output()
   whenLoggedIn: EventEmitter<Object> = new EventEmitter();
 
-  constructor(
-    private authService: AuthenticateService,
-    private store: Store<any>
-  ) {}
-
-  ngOnInit() {
-    this.authService.login("affi", "affi").subscribe(response => {
-      if (response.status === 200) {
-        this.store.dispatch(
-          new LoginSuccess({ name: this.userName, token: response.body, isUserLoggedIn: true })
-        );
-      }
-    });
-  }
+  constructor(private store: Store<any>) {}
 
   login() {
-    this.authService.login(this.userName, this.password).subscribe(response => {
-      if (response.status === 200) {
-        this.store.dispatch(
-          new LoginSuccess({ name: this.userName, token: response.body, isUserLoggedIn: true })
-        );
-      }
-    });
+    this.store.dispatch(
+      new Login({ username: this.userName, password: this.password })
+    );
   }
 }
