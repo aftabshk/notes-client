@@ -1,5 +1,6 @@
 import { Component } from "@angular/core";
-import { AuthenticateService } from "src/app/services/AuthenticateService";
+import { Store } from "@ngrx/store";
+import { Signup } from "src/app/store/signup/signup.actions";
 
 @Component({
   selector: "signup-component",
@@ -9,9 +10,11 @@ export class SignupComponent {
   userName: string;
   password: string;
 
-  constructor(private authService: AuthenticateService) {}
+  constructor(private store: Store<any>) {}
 
   signup() {
-    this.authService.signup(this.userName, this.password).subscribe();
+    this.store.dispatch(
+      new Signup({ username: this.userName, password: this.password })
+    );
   }
 }

@@ -1,6 +1,5 @@
 import { Component, Input, OnInit } from "@angular/core";
-import { Store, select } from "@ngrx/store";
-import { Observable } from 'rxjs';
+import { select, Store } from "@ngrx/store";
 import { Note } from "src/app/models/Note";
 import { NotesService } from "src/app/services/NotesService";
 import { GetNotes } from 'src/app/store/notes/notes.actions';

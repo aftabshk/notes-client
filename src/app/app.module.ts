@@ -15,6 +15,7 @@ import { reducers } from "./store/reducers";
 import { EffectsModule } from "@ngrx/effects";
 import { NotesEffects } from "./store/notes/notes.effects";
 import { LoginEffect } from "./store/login/login.effects";
+import { SignupEffects } from "./store/signup/signup.effects";
 
 @NgModule({
   declarations: [
@@ -31,7 +32,7 @@ import { LoginEffect } from "./store/login/login.effects";
     FormsModule,
     StoreModule.forRoot({ appData: reducers }),
     StoreDevtoolsModule.instrument(),
-    EffectsModule.forRoot([NotesEffects, LoginEffect])
+    EffectsModule.forRoot([NotesEffects, LoginEffect, SignupEffects])
   ],
   providers: [NotesService],
   bootstrap: [AppComponent]

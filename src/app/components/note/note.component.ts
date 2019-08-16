@@ -1,19 +1,7 @@
-import {
-  Component,
-  OnInit,
-  Input,
-  OnChanges,
-  SimpleChanges,
-  ViewChild,
-  ElementRef
-} from "@angular/core";
-import { NotesService } from "src/app/services/NotesService";
-import { Store, select } from "@ngrx/store";
-import {
-  DeleteNoteSuccess,
-  EditNoteSuccess
-} from "src/app/store/notes/notes.actions";
+import { Component, ElementRef, Input, OnInit, ViewChild } from "@angular/core";
+import { select, Store } from "@ngrx/store";
 import { Note } from "src/app/models/Note";
+import { DeleteNote, EditNote } from "src/app/store/notes/notes.actions";
 
 @Component({
   selector: "note-component",
@@ -32,7 +20,7 @@ export class NoteComponent implements OnInit {
   @ViewChild("titleElement") titleElement: ElementRef;
   @ViewChild("descriptionElement") descriptionElement: ElementRef;
 
-  constructor(private notesService: NotesService, private store: Store<any>) {}
+  constructor(private store: Store<any>) {}
 
   ngOnInit() {
     this.store.pipe(select("appData")).subscribe(appData => {
@@ -41,18 +29,14 @@ export class NoteComponent implements OnInit {
   }
 
   delete() {
-    this.notesService.deleteNote(this.id, this.userToken).subscribe(() => {
-      this.store.dispatch(new DeleteNoteSuccess(this.id));
-    });
+    this.store.dispatch(new DeleteNote(this.id, this.userToken));
   }
 
   save() {
     const title = this.titleElement.nativeElement.innerText;
     const description = this.descriptionElement.nativeElement.innerText;
     const note: Note = { title, description };
-    this.notesService.editNote(this.id, note, this.userToken).subscribe(() => {
-      this.store.dispatch(new EditNoteSuccess(this.id, note));
-    });
+    this.store.dispatch(new EditNote(this.id, note, this.userToken));
   }
 
   cancel() {
