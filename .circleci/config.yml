@@ -6,9 +6,9 @@ jobs:
     steps:
       - checkout
       - run: echo "A first hello"
-  test:
-    docker:
-      - image: circleci/<language>:<version TAG>
-    steps:
-      - checkout
-      - run: ng test
+    test:
+      docker:
+        - image: circleci/<language>:<version TAG>
+      steps:
+        - checkout
+        - run: npm test
